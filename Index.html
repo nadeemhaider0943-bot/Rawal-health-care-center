@@ -1,0 +1,508 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rawal Health Care Center</title>
+  <style>
+:root {
+  --bg-color: #f5f9ff;
+  --text-color: #333;
+  --card-bg: #ffffff;
+  --accent: #e41111;
+  --border-color: #ddd;
+}
+
+body.dark {
+  --bg-color: #0f172a;
+  --text-color: #e2e8f0;
+  --card-bg: #1e293b;
+  --accent: #e41111;
+  --border-color: #334155;
+}
+html { 
+  scroll-behavior: smooth; 
+}
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Segoe UI', Arial, sans-serif; 
+}
+
+body { 
+  background-color: var(--bg-color); 
+  color: var(--text-color); 
+  line-height: 1.6; 
+} 
+
+header { 
+  background: var(--accent); 
+  color: white; 
+  padding: 40px 20px; 
+  text-align: center; 
+}
+
+header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+header p { font-size: 1.1rem; opacity: 0.9; }
+
+nav { 
+  background: var(--accent); 
+  padding: 10px; 
+  text-align: center; 
+  position: sticky; 
+  top: 0; 
+  z-index: 100;
+}
+
+nav a { 
+  color: white; 
+  margin: 0 15px; 
+  text-decoration: none; 
+  font-weight: 500; 
+}
+
+body.dark nav a { color: #e2e8f0; }
+nav a:hover { text-decoration: underline; }
+
+section { 
+  max-width: 900px; 
+  margin: 40px auto; 
+  padding: 60px 20px 0 20px; 
+}
+
+section h2 { 
+  color: var(--accent); 
+  margin-bottom: 15px; 
+  font-size: 1.8rem; 
+}
+
+.facilities li { 
+  background: var(--card-bg); 
+  color: var(--text-color);
+  margin: 10px 0; 
+  padding: 12px; 
+  border-left: 4px solid var(--accent); 
+  border-radius: 4px; 
+}
+
+/* TABLE */
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 15px;
+}
+
+table td, table th { 
+  padding: 12px; 
+  text-align: left; 
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  transition: background 0.2s;
+}
+
+table th { 
+  background-color: var(--accent); 
+  color: white; 
+}
+/* ROW LIFT EFFECT */
+tbody tr {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1;
+  position: relative;
+}
+.contact { 
+  background: var(--card-bg); 
+  color: var(--text-color);
+  padding: 20px; 
+  border-radius: 8px; 
+  border-left: 4px solid var(--accent);
+}
+
+footer { 
+  text-align: center; 
+  padding: 20px; 
+  background: var(--accent); 
+  color: white; 
+  margin-top: 40px; 
+}
+
+.answer {
+  display: none;
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+.answer.show {
+  display: block;
+}
+
+.question {
+  cursor: pointer;
+  background: var(--card-bg);
+  color: var(--text-color);
+  padding: 10px;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  font-weight: 500;
+}
+
+#dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+@media (max-width: 600px) {
+  header h1 { font-size: 1.8rem; }
+  nav a { display: block; margin: 8px 0; }
+  section { padding: 80px 15px 0 15px; }
+}
+@media (max-width: 600px) {
+  table, thead, tbody, tr { display: block; }
+  
+  th { display: none; }
+  
+  tr { 
+    margin-bottom: 15px; 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px;
+  }
+  
+  td { 
+    border: none; 
+    border-bottom: 1px solid var(--border-color); 
+    position: relative; 
+    padding-left: 140px; /* more space so text doesn't overlap */
+    min-height: 45px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  
+  td:last-child { border-bottom: none; }
+  
+  td:before { 
+    content: attr(data-label); 
+    position: absolute; 
+    left: 12px; 
+    top: 14px; 
+    width: 120px; 
+    font-weight: bold; 
+    color: var(--accent); 
+  }
+}
+.book-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  background: var(--accent);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 999;
+  transition: transform 0.2s;
+}
+
+.book-btn:hover {
+  transform: translateY(-3px);
+}
+.booking-form {
+  max-width: 600px;
+  margin: 30px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  padding: 12px 15px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.submit-btn {
+  background: var(--accent);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+  
+  td {
+    position: relative;
+    padding-left: 140px; /* make space for red label */
+    min-height: 40px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  td::before {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    width: 120px;
+    font-weight: bold;
+    color: red;
+    white-space: nowrap;
+  }
+  
+  /* Label text for each column */
+  td:nth-of-type(1)::before { content: "Test"; }
+  td:nth-of-type(2)::before { content: "What It Checks"; }
+  td:nth-of-type(3)::before { content: "Prep Needed"; }
+  td:nth-of-type(4)::before { content: "Est Time"; }
+
+</style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <img src="logo.png.jpeg" alt="Rawal Health Care Centre Logo" style="height: 120px;">
+      <div>
+        <h1 style="margin: 0;">Rawal Health Care Centre</h1>
+        <p style="margin: 5px 0 0 0; font-size: 1.1rem; opacity: 0.9;">Quality Care for Your Health.</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#tests">Tests</a>
+    <a href="#contacts">Contacts</a>
+  </nav>
+  <div style="background:#e8f5e9; color:#000000; padding:8px; text-align:center; font-size:14px; border-bottom:1px solid #c8e6c9;">
+  💧 Stay hydrated! Take care of yourself.
+</div>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Rawal Health Centre was dedicated to providing accessible and reliable diagnostic services to the Rawaltown community. Our focus was on accurate testing, patient comfort, and fast results.</p>
+  </section>
+
+  <section id="facilities" class="facilities">
+    <h2>Our Facilities</h2>
+    <ul>
+      <li><strong>Digital X-Ray</strong> – Fast, low-radiation imaging for chest, bones, and joints</li>
+      <li><strong>Pathology Lab</strong> – Fully equipped for blood and urine analysis</li>
+      <li><strong>Cardiac Unit</strong> – ECG and basic cardiac screening</li>
+      <li><strong>Ultrasound Room</strong> – Abdomen, pelvis, and pregnancy scans</li>
+      <li><strong>Consultation Rooms</strong> – Private spaces for general checkups</li>
+    </ul>
+  </section>
+
+  <section id="tests">
+    <h2>Available Tests</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Test</th>
+          <th>What It Checks</th>
+          <th>Prep Needed</th>
+          <th>Est. Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Test">Blood CP Test</td>
+          <td data-label="What It Checks">Complete blood count, infections, anemia</td>
+          <td data-label="Prep Needed">No fasting required</td>
+          <td data-label="Est. Time">15 min</td>
+        </tr>
+        <tr>
+          <td data-label="Test">X-Ray</td>
+          <td data-label="What It Checks">Bone fractures, chest conditions</td>
+          <td data-label="Prep Needed">Remove metal items</td>
+          <td data-label="Est. Time">10 min</td>
+        </tr>
+        <tr>
+          <td data-label="Test">ECG</td>
+          <td data-label="What It Checks">Heart rhythm and electrical activity</td>
+          <td data-label="Prep Needed">Rest for 5 min before</td>
+          <td data-label="Est. Time">5 min</td>
+        </tr>
+        <tr>
+          <td data-label="Test">Blood Sugar Test</td>
+          <td data-label="What It Checks">Glucose levels for diabetes screening</td>
+          <td data-label="Prep Needed">Fasting 8 hrs for FBS</td>
+          <td data-label="Est. Time">5 min</td>
+        </tr>
+        <tr>
+          <td data-label="Test">Urine Analysis</td>
+          <td data-label="What It Checks">Kidney function, infections</td>
+          <td data-label="Prep Needed">Clean catch sample</td>
+          <td data-label="Est. Time">10 min</td>
+        </tr>
+        <tr>
+          <td data-label="Test">Ultrasound</td>
+          <td data-label="What It Checks">Abdominal organs, pregnancy</td>
+          <td data-label="Prep Needed">Full bladder for pelvic scan</td>
+          <td data-label="Est. Time">20 min</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p><strong>Address:</strong> Rawaltown, Street 31, in front of Tayyaba Masjid</p>
+      <p><strong>Phone:</strong> +92 300 1234567</p>
+      <p><strong>Hours:</strong> Mon - Sat, 9:00 AM to 8:00 PM</p>
+      <p><strong>Email:</strong> info@rawalhealthcentre.example</p>
+    </div>
+  </section>
+
+  <h2>FAQ</h2>
+  <button class="question">What are your hours?</button>
+  <div class="answer">
+    <p>We’re open Mon-Fri 9am to 6pm.</p>
+  </div>
+
+  <button class="question">Do you accept walk-ins?</button>
+  <div class="answer">
+    <p>Yes, but appointments get priority.</p>
+  </div>
+
+ 
+  <a href="#booking" class="book-btn">📅 Book Test</a>
+  <!-- BOOKING SECTION -->
+<section id="booking" class="section">
+  <h2>Book Your Test</h2>
+  <p>Fill the form. We’ll call you to confirm time & price.</p>
+  
+  <form class="booking-form">
+    <div class="form-row">
+      <input type="text" placeholder="Full Name" required>
+      <input type="tel" placeholder="Phone Number" required>
+    </div>
+    
+    <div class="form-row">
+      <input type="email" placeholder="Email (optional)">
+      <select required>
+        <option value="" disabled selected>Select Test</option>
+        <option>CBC - Complete Blood Count</option>
+        <option>LFT - Liver Function Test</option>
+        <option>KFT - Kidney Function Test</option>
+        <option>Blood Sugar / HbA1c</option>
+        <option>Typhoid Test</option>
+        <option>Urine DR</option>
+        <option>Other / Not Sure</option>
+      </select>
+    </div>
+    
+    <textarea placeholder="Any notes? Fasting required? Symptoms?" rows="3"></textarea>
+    
+    <button type="submit" class="submit-btn">Send Booking Request</button>
+  </form>
+</section>
+<script>
+document.querySelector('.booking-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = this.querySelector('input[type="text"]').value;
+  const phone = this.querySelector('input[type="tel"]').value;
+  const email = this.querySelector('input[type="email"]').value || 'Not given';
+  const test = this.querySelector('select').value;
+  const notes = this.querySelector('textarea').value || 'None';
+  
+  // Build message
+  const message = `🩺 *New Test Booking - Rawal Health Care*\n\n` +
+                  `*Name:* ${name}\n` +
+                  `*Phone:* ${phone}\n` +
+                  `*Email:* ${email}\n` +
+                  `*Test:* ${test}\n` +
+                  `*Notes:* ${notes}`;
+
+  const whatsappNumber = '923346766851'
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+  
+  this.reset();
+  alert('Opening WhatsApp... Just hit Send to confirm booking.');
+});
+</script>
+
+<button id="dark-mode-toggle">🌙</button>
+
+<script>
+const toggleBtn = document.getElementById('dark-mode-toggle');
+const body = document.body;
+
+if(localStorage.getItem('theme') === 'dark') {
+  body.classList.add('dark');
+  toggleBtn.textContent = '☀️';
+}
+
+toggleBtn.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  if(body.classList.contains('dark')) {
+    toggleBtn.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    toggleBtn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  }
+});
+
+// FAQ toggle
+document.querySelectorAll('.question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.nextElementSibling.classList.toggle('show');
+  });
+});
+</script>
+ <script src="script.js"></script>
+  <footer>
+    <p>© 2026 Rawal Health Centre - Practice Site</p>
+  </footer>
+</body>
+</html>
